@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int info;
+    struct node*link;
+};
+struct node* addatbeg(struct node *start,int data)
+{
+    struct node *temp=(struct node*)malloc(sizeof(struct node));
+    temp->info=data;
+    temp->link=start;
+    start=temp;
+   return start;
+}
+void display(struct node*start)
+{
+    struct node *p;
+    p=start;
+    while(p!=NULL)
+    {
+        printf("%d ",p->info);
+        p=p->link;
+    }
+    printf("\n\n");
+}
+
+struct node*movetolast(struct node *start)
+{struct node *last,*seclast;
+last=(struct node*)malloc(sizeof(struct node));
+seclast=(struct node*)malloc(sizeof(struct node));
+seclast=NULL;
+last=start;
+while(last->link!=NULL)
+{seclast=last;
+    last=last->link;
+}
+seclast->link=NULL;
+
+last->link=start;
+start=last;
+return start;
+
+}
+int main()
+{
+    int n,choice,data;
+    struct node *start=NULL;
+   // scanf("%d",&choice);
+    while(1)
+    { printf("\n1.Insert at begining\n2.display\n3.Move last node to front node \n4.End\n Enter your choice  ");
+    scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:printf("Enter the data to be inserted ");
+            scanf("%d",&data);
+            start=addatbeg(start,data);
+            break;
+            case 2: display(start);
+            break;
+            case 3:start=movetolast(start);
+            
+            break;
+            case 4: 
+            exit(1);
+            default:printf("NO");
+        }
+    }
+}
+        
+        
